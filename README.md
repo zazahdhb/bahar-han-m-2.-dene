@@ -11,26 +11,27 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #fdf0f5; /* Daha soft bir pembe tonu */
+            background-color: #fdf0f5;
             font-family: 'Arial', sans-serif;
             overflow: hidden;
             text-align: center;
-            padding: 20px; /* Kenar boşluğu eklendi */
+            padding: 20px;
             box-sizing: border-box;
         }
         .container {
             position: relative;
         }
         h1 {
-            color: #ff69b4; /* Canlı pembe */
+            color: #ff69b4;
             font-size: 2.2em;
             margin-bottom: 30px;
+            line-height: 1.3; /* Satırlar arası boşluğu biraz artırdık */
         }
         .buttons {
             display: flex;
             gap: 20px;
             justify-content: center;
-            flex-wrap: wrap; /* Küçük ekranlar için butonların alta geçmesini sağlar */
+            flex-wrap: wrap;
         }
         button {
             padding: 15px 30px;
@@ -44,10 +45,10 @@
             font-weight: bold;
         }
         #evet-btn {
-            background-color: #28a745; /* Yeşil */
+            background-color: #28a745;
         }
         #hayir-btn {
-            background-color: #dc3545; /* Kırmızı */
+            background-color: #dc3545;
         }
         #evet-btn:hover {
             transform: scale(1.1);
@@ -62,7 +63,7 @@
             background-color: white;
             border-radius: 15px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-            max-width: 500px; /* Mesaj kutusuna maksimum genişlik */
+            max-width: 500px;
         }
         .mesaj h2 {
             color: #ff69b4;
@@ -72,10 +73,11 @@
             line-height: 1.6;
         }
 
-        /* Mobil cihazlar için ek düzenlemeler */
+        /* MOBİL CİHAZLAR İÇİN DÜZENLEME BURADA! */
         @media (max-width: 480px) {
             h1 {
-                font-size: 1.8em;
+                /* Eski 'font-size: 1.8em;' yerine bu satırı kullanıyoruz */
+                font-size: 8vw; /* Yazıyı ekran genişliğine göre otomatik ayarlar, sihir bu! */
             }
             button {
                 padding: 12px 25px;
@@ -107,7 +109,6 @@
         </p>
     </div>
 
-    <!-- MÜZİK DOSYASINI BURADAN ÇAĞIRIYORUZ. İSİM TAM OLARAK 'muzik.mp3' OLMALI -->
     <audio id="barisma-muzigi" src="muzik.mp3" loop></audio>
 
     <script>
@@ -121,7 +122,6 @@
         let evetButtonScale = 1;
         const buyumeOrani = 0.25;
 
-        // "Hayır" butonuna her tıklandığında "Evet" butonunu büyüten fonksiyon
         hayirBtn.addEventListener('click', () => {
             hayirTiklamaSayisi++;
             if (hayirTiklamaSayisi <= 5) {
@@ -130,19 +130,15 @@
                 evetBtn.style.padding = `${15 + hayirTiklamaSayisi * 4}px ${30 + hayirTiklamaSayisi * 8}px`;
                 evetBtn.style.fontSize = `${1.2 + hayirTiklamaSayisi * 0.15}em`;
             }
-            // 5. tıklamadan sonra "Hayır" butonu kaybolur
             if (hayirTiklamaSayisi === 5) {
                 hayirBtn.style.display = 'none';
             }
         });
 
-        // "Evet" butonuna tıklandığında barışma mesajını gösterir ve müziği başlatır
         evetBtn.addEventListener('click', () => {
             secimContainer.style.display = 'none';
             barismaMesaji.style.display = 'block';
             barismaMuzigi.play().catch(error => {
-                // Tarayıcılar bazen otomatik müzik çalmayı engelleyebilir.
-                // Bu yüzden hatayı konsolda gösteriyoruz.
                 console.error("Müzik çalınırken bir hata oluştu:", error);
             });
         });
